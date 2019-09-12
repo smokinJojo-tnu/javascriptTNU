@@ -29,14 +29,6 @@
         triviaArray[0][7] = "Unix";
 
 
-        // Retrieve question from Array
-        // Output question to the screen 'Prompt'
-        //document.write(triviaArray[0][0]);
-        // Output radio buttons with answers to the screen
-        // Get the answer from the user 'onClick'
-        // Check if answer is correct
-        // Return score to user
-
 alert("The length of the array is " + triviaArray.length);
 
         for (q = 0; q < triviaArray.length; q++)
@@ -44,6 +36,7 @@ alert("The length of the array is " + triviaArray.length);
             displayQuestion(q);                     // call the display function and pass it 'q' pointer
         }
 
+        // Output question to the screen 'Prompt'
 
         // create the function that will display the question for each cycle of the loop
         function displayQuestion(i)
@@ -51,26 +44,79 @@ alert("The length of the array is " + triviaArray.length);
 
 alert("This is the beginning of the displayQuestion function; i is equal to " + i);
             var questionId = "question" + i;
-
+            // Output radio buttons with answers to the screen
             document.write("<p>" + triviaArray[i][3] + "</p>");
             document.write("<input type='radio' id='" + 'a' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][4] + "'>'" + triviaArray[i][4] + "<br/>");
             document.write("<input type='radio' id='" + 'b' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][4] + "'>'" + triviaArray[i][5] + "<br/>");
             document.write("<input type='radio' id='" + 'c' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][5] + "'>'" + triviaArray[i][6] + "<br/>");
             document.write("<input type='radio' id='" + 'd' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][6] + "'>'" + triviaArray[i][7] + "<br/>");
 
+        }   // end of the displayQuestion function
+
+        
+        
+        
+        // create function that will check the users answers
+        function gradeUser()
+        {
+
+alert("This is the beginning of the gradeUser function");
+        
+          var userAnswer = "";
+            numCorrect = 0;
+            numWrong = 0;
+            
+            // Check if answer is correct
+            for (c = 0; c < triviaArray.length; c++)   // the for loop will check the answer against each option
+            {
+                
+                var solution = triviaArray[c][1];
+                alert("The correct answer is " + solution);
+
+                var answerOption = "a" + (c+1);
+                alert("(debugger) answerOption = " + answerOption);
+                if(document.getElementById(answerOption).checked == true)
+                {
+                    userAnswer = "a";
+                }
+
+                var answerOption = "b" + (c+1);
+                if(document.getElementById(answerOption).checked == true)
+                {
+                    userAnswer = "b";
+                }
+
+                var answerOption = "c" + (c+1);
+                if(document.getElementById(answerOption).checked == true)
+                {
+                    userAnswer = "c";
+                }
+
+                var answerOption = "d" + (c+1);
+                if(document.getElementById(answerOption).checked == true)
+                {
+                    userAnswer = "d";
+                }
+
+                alert("You selected " + userAnswer);    // display the users choice
+                if(userAnswer == solution)
+                    numCorrect++;                       // count if correct
+                else 
+                    numWrong++;                         // count if wrong
+                
+                 // Return score to user
+                alert("You answered " + numCorrect + " correctly, and you got " + numWrong + " wrong!");
+
+
+            }   // end of the for loop
         }
-
-
-
-
-
-
 
         </script>
 
     </form>
 
-
+    <!-- Get the answer from the user 'onClick' -->
+    <input type="submit" onClick="return gradeUser()">
 
 </body>
 </html>
