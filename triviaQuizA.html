@@ -5,6 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Trivia Quiz Project</title>
+
+    <script type="text/javascript">
+    
+        function displayQuestion(i)
+        {       // create the function that will display the question for each cycle of the loop
+                // alert("This is the beginning of the displayQuestion function; i is equal to " + i);
+            var questionId = "question" + i;
+                // Output radio buttons with possible solutions to the screen
+            document.write("<p>" + triviaArray[i][3] + "</p>");
+            document.write("<input type='radio' id='" + 'a' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][4] + "'>'" + triviaArray[i][4] + "<br/>");
+            document.write("<input type='radio' id='" + 'b' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][4] + "'>'" + triviaArray[i][5] + "<br/>");
+            document.write("<input type='radio' id='" + 'c' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][5] + "'>'" + triviaArray[i][6] + "<br/>");
+            document.write("<input type='radio' id='" + 'd' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][6] + "'>'" + triviaArray[i][7] + "<br/>");
+                // document.write("<input type='submit' onclick='continue'>");
+        }   // end of the displayQuestion function
+
+        function gradeUser()    // create function that will check the users answers for multichoice questions
+        {   // alert("This is the beginning of the gradeUser function");        
+            var userAnswer = "";            
+                // Check if answer is correct - probably could use a ****switch case**** here...
+            for (c = 0; c < triviaArray.length; c++)   // the for loop will check the answer against each option
+            {                
+                var solution = triviaArray[c][1];
+                alert("The correct answer to question " + (c + 1) + " is " + solution);
+                
+                var answerOption = "a" + (c+1);     // alert("(debugger) answerOption = " + answerOption);
+                if(document.getElementById(answerOption).checked == true) { userAnswer = "a"; }
+                
+                var answerOption = "b" + (c+1);
+                if(document.getElementById(answerOption).checked == true) { userAnswer = "b"; }
+
+                var answerOption = "c" + (c+1);
+                if(document.getElementById(answerOption).checked == true) { userAnswer = "c"; }
+
+                var answerOption = "d" + (c+1);
+                if(document.getElementById(answerOption).checked == true) { userAnswer = "d"; }
+
+                alert("You selected " + userAnswer);    // display the users choice
+                if(userAnswer == solution)
+                    numCorrect++;                       // count if correct
+                else 
+                    numWrong++;                         // count if wrong                
+            }   // end of the for loop for multichoice questions
+
+            // Fill in the blank grading mechanism goes here *************************************************
+
+            alert("You answered " + numCorrect + " correctly, and you got " + numWrong + " wrong!");
+        
+        }
+
+    
+    
+    
+    
+    
+    
+    </script>
+
+
+
 </head>
 <body>
     <form name="testForm" id="testForm">
@@ -13,130 +73,74 @@
 
         // Display H1 Title text
         //document.write("Trivia Quiz");
+        numCorrect = 0;
+        numWrong = 0;
 
-        // Create an array for questions and answers
-        var triviaArray = new Array;      
-        // Put a second array inside of the first array for 2 dimensional array  
-        triviaArray[0] = new Array;             
-        triviaArray[0][0] = "1";                // question number
-        triviaArray[0][1] = "a";                // solution to question
-        triviaArray[0][2] = "multiChoice";      // type of question
-        // trivia question and answers below
-        triviaArray[0][3] = "Which programming language was developed by Netscape?";                
-        triviaArray[0][4] = "JavaScript";                
-        triviaArray[0][5] = "C++";
-        triviaArray[0][6] = "Fortran";
-        triviaArray[0][7] = "Unix";
+            // Create an array for multichoice questions and answers
+            var triviaArray = new Array;      
+            // Put a second array inside of the first array for 2 dimensional array  
+            triviaArray[0] = new Array;             
+            triviaArray[0][0] = "1";                // question number
+            triviaArray[0][1] = "a";                // solution to question
+            triviaArray[0][2] = "multiChoice";      // type of question
+            // trivia question and answers below
+            triviaArray[0][3] = "Which programming language was developed by Netscape?";                
+            triviaArray[0][4] = "JavaScript";                
+            triviaArray[0][5] = "C++";
+            triviaArray[0][6] = "Fortran";
+            triviaArray[0][7] = "Unix";
 
-        triviaArray[1] = new Array;             
-        triviaArray[1][0] = "2";                // question number
-        triviaArray[1][1] = "d";                // solution to question
-        triviaArray[1][2] = "multiChoice";      // type of question
-        // trivia question and answers below
-        triviaArray[1][3] = "Which of the following is not a method for encoding text characters on a computer?";                
-        triviaArray[1][4] = "EBCDIC";                
-        triviaArray[1][5] = "ASCII";
-        triviaArray[1][6] = "SIXBIT";
-        triviaArray[1][7] = "ANSI";
+            triviaArray[1] = new Array;             
+            triviaArray[1][0] = "2";                // question number
+            triviaArray[1][1] = "d";                // solution to question
+            triviaArray[1][2] = "multiChoice";      // type of question
+            // trivia question and answers below
+            triviaArray[1][3] = "Which of the following is not a method for encoding text characters on a computer?";                
+            triviaArray[1][4] = "EBCDIC";                
+            triviaArray[1][5] = "ASCII";
+            triviaArray[1][6] = "SIXBIT";
+            triviaArray[1][7] = "ANSI";
 
-        triviaArray[2] = new Array;             
-        triviaArray[2][0] = "3";                // question number
-        triviaArray[2][1] = "b";                // solution to question
-        triviaArray[2][2] = "multiChoice";      // type of question
-        // trivia question and answers below
-        triviaArray[2][3] = "Which of the following terms does not refer to a potentially harmful computer program?";                
-        triviaArray[2][4] = "Rootkit";                
-        triviaArray[2][5] = "Hardware";
-        triviaArray[2][6] = "Adware";
-        triviaArray[2][7] = "Spyware";
-//alert("The length of the array is " + triviaArray.length);
+            triviaArray[2] = new Array;             
+            triviaArray[2][0] = "3";                // question number
+            triviaArray[2][1] = "b";                // solution to question
+            triviaArray[2][2] = "multiChoice";      // type of question
+            // trivia question and answers below
+            triviaArray[2][3] = "Which of the following terms does not refer to a potentially harmful computer program?";                
+            triviaArray[2][4] = "Rootkit";                
+            triviaArray[2][5] = "Hardware";
+            triviaArray[2][6] = "Adware";
+            triviaArray[2][7] = "Spyware";
+                //alert("The length of the array is " + triviaArray.length);
 
             for (q = 0; q < triviaArray.length; q++)
             {                                           // create the for loop and assign 'q' as the index pointer
                 displayQuestion(q);                     // call the display function and pass it 'q' pointer
-            }
 
-            // Output question to the screen 'Prompt'
-
-            // create the function that will display the question for each cycle of the loop
-            function displayQuestion(i)
-            {
-
-//    alert("This is the beginning of the displayQuestion function; i is equal to " + i);
-                var questionId = "question" + i;
-                // Output radio buttons with answers to the screen
-                document.write("<p>" + triviaArray[i][3] + "</p>");
-                document.write("<input type='radio' id='" + 'a' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][4] + "'>'" + triviaArray[i][4] + "<br/>");
-                document.write("<input type='radio' id='" + 'b' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][4] + "'>'" + triviaArray[i][5] + "<br/>");
-                document.write("<input type='radio' id='" + 'c' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][5] + "'>'" + triviaArray[i][6] + "<br/>");
-                document.write("<input type='radio' id='" + 'd' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][6] + "'>'" + triviaArray[i][7] + "<br/>");
-
-               
-
-                if (i == triviaArray.length)
-                {
-                    gradeUser();
-                }
-
-
-            }   // end of the displayQuestion function
+            }    
         
+            // Create a object to hold fill in the blank (fib) questions and answers
+
+            var fibString = new String("Question one=answer one, Question two=answer two, Question three=answer three, Question four=answer four, Question five=answer five");    
+
+           
+
+            // write questions to the screen
+
+            document.write("");
         
-        
-        // create function that will check the users answers
-        function gradeUser()
-        {
-
-//          alert("This is the beginning of the gradeUser function");
-        
-          var userAnswer = "";
-            numCorrect = 0;
-            numWrong = 0;
-            
-            // Check if answer is correct
-            for (c = 0; c < triviaArray.length; c++)   // the for loop will check the answer against each option
-            {
-                
-                var solution = triviaArray[c][1];
-                alert("The correct answer to question " + (c + 1) + " is " + solution);
-
-                var answerOption = "a" + (c+1);
-//                alert("(debugger) answerOption = " + answerOption);
-                if(document.getElementById(answerOption).checked == true)
-                {
-                    userAnswer = "a";
-                }
-
-                var answerOption = "b" + (c+1);
-                if(document.getElementById(answerOption).checked == true)
-                {
-                    userAnswer = "b";
-                }
-
-                var answerOption = "c" + (c+1);
-                if(document.getElementById(answerOption).checked == true)
-                {
-                    userAnswer = "c";
-                }
-
-                var answerOption = "d" + (c+1);
-                if(document.getElementById(answerOption).checked == true)
-                {
-                    userAnswer = "d";
-                }
-
-                alert("You selected " + userAnswer);    // display the users choice
-                if(userAnswer == solution)
-                    numCorrect++;                       // count if correct
-                else 
-                    numWrong++;                         // count if wrong
-                
-                 // Return score to user
-                alert("You answered " + numCorrect + " correctly, and you got " + numWrong + " wrong!");
 
 
-            }   // end of the for loop
-        }
+
+
+
+
+
+
+
+
+
+
 
         </script>
 
@@ -145,5 +149,5 @@
     <!-- Get the answer from the user 'onClick' -->
     <input type="submit" onClick="return gradeUser()">
 
-</body>
+    </body>
 </html>
