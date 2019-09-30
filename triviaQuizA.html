@@ -7,6 +7,21 @@
     <title>Trivia Quiz Project</title>
 
     <script type="text/javascript">
+
+        
+
+        function loadTimer()    // This function is called if user enters a value into the Time Limit Prompt 
+        {
+            timer = setTimeout("alert('Times Up!!') + gradeUser() ", timeLimit);
+        }
+
+        function startQuiz()    // This function starts the quiz process
+        {
+            for (q = 0; q < userNumQuestions; q++)     // create the for loop and assign 'q' as the index pointer
+            {                                     
+                displayQuestion(q);     // call the display function and pass it 'q' pointer                    
+            }
+        }
     
         function displayQuestion(i)
         {       // create the function that will display the question for each cycle of the loop
@@ -36,9 +51,11 @@
 
         function gradeUser()    // create function that will check the users answers for multichoice questions
         {   // alert("This is the beginning of the gradeUser function");        
-            var userAnswer = "";            
+            var userAnswer = "";
+                // Stop the timer
+            clearTimeout(timer);            
                 // Check if answer is correct - probably could use a ****switch case**** here...
-            for (c = 0; c < triviaArray.length; c++)   // the for loop will check the answer against each option
+            for (c = 0; c < userNumQuestions; c++)   // the for loop will check the answer against each option
             {   
                 var solution = triviaArray[c][1];
                 //alert("The correct answer to question " + (c + 1) + " is " + solution);   // Display the correct answer
@@ -96,25 +113,10 @@
             alert("You answered " + numCorrect + " correctly, and you got " + numWrong + " wrong!");
         
         }   // End of gradeUser() function
-    
-    
-    </script>   <!-- End of header script area -->
-</head>
-<!--///////////////////////////////////////////////////////////////////////////////////////////////////-->
-<body>
-    <form name="testForm" id="testForm">
-        
-        <script language = "javascript">
 
-            // Display H1 Title text
-        document.write("<h1>Trivia Quiz</h1>");
 
-            // Initialize variables
-        numCorrect = 0;
-        numWrong = 0;
-
-                // Create an array for multichoice questions and answers
-            var triviaArray = new Array;      
+                        // Create an array for multichoice questions and answers
+                        var triviaArray = new Array;      
                 // Put a second array inside of the first array for 2 dimensional array  
             triviaArray[0] = new Array;             
             triviaArray[0][0] = "1";                // question number
@@ -180,31 +182,53 @@
             triviaArray[5][4] = "";                
             triviaArray[5][5] = "";
             triviaArray[5][6] = "";
-            triviaArray[5][7] = "";
+            triviaArray[5][7] = "";  
+    
+    </script>   <!-- End of header script area -->
+</head>
 
+<!--///////////////////////////////////////////////////////////////////////////////////////////////////-->
 
-
-                //alert("The length of the array is " + triviaArray.length);
-
-            for (q = 0; q < triviaArray.length; q++)
-            {                                           // create the for loop and assign 'q' as the index pointer
-                
-               
-                displayQuestion(q);                     // call the display function and pass it 'q' pointer
-                
-                
-
-            }    
+<body>
+    <form name="testForm" id="testForm">       
         
+        <script language = "javascript">
+
+                // Display H1 Title text
+            document.write("<h1>Trivia Quiz</h1></br>");
+
+                // Initialize variables
+            var timeLimit = 0;
+            var timer;
+            var userNumQuestions = triviaArray.length;
+            var numCorrect = 0;
+            var numWrong = 0;
+
+            userNumQuestions = prompt("Please enter the number of questions \n you would like to try ( 1 - " + triviaArray.length + " )");
+
+            timeLimit = prompt("If you would like to set a time limit, \nenter the seconds here; If not leave blank", 0);
+
+            //alert("The length of the array is " + triviaArray.length);
+
+            if(timeLimit != 0)  // This statement will execute the quiz with a timer if a value is entered at the prompt  
+            {
+                timeLimit = timeLimit * 1000;   // sets the milliseconds to seconds
+                loadTimer();
+                startQuiz();
+            }   // end of if statement
+            else
+            {
+                //alert("the else statement started");
+                startQuiz();
+            }   // end of else statement
+
+            //document.write("<button onclick = 'gradeUser()'>Check Answers</button>");      //<!--This button ends, grades and returns the score of the quiz -->
 
         </script>
 
-    </form>
+    </form>    
 
-    <!-- Get the answer from the user 'onClick' -->
-    </br></br>
-    <!-- <input type="submit" onClick="return gradeUser()"> -->
-    <button onclick = "gradeUser()">Check Answers</button>
+    </br></br><button onclick = "gradeUser()">Check Answers</button>      This button ends, grades and returns the score of the quiz
 
     </body>
 </html>
