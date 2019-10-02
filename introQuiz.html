@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script type="text/javascript">
+
+    var numQuestion;
+    var timeSpan;
+
+    function startQuiz()    // pass variables into sessionStorage and move to the quiz page.
+    {   
+        // Get the number selected from the dropdown menu called numberQ and store it inside numQuestion.
+    numQuestion = document.getElementById("numberQ").value;
+        // Set the value in numQuestion to the sessionStorage variable numQ, this will pass to the quiz page.
+    window.sessionStorage.setItem("numQ", numQuestion);
+        // Get the value from the textbox called timLin and place it into timeSpan.
+    timeSpan = document.getElementById("timLim").value;
+        // Set the value in timeSpan to the sessionStorage variable timed, this will be passed to the quiz page.
+    window.sessionStorage.setItem("timed", timeSpan);
+        // Links to the quiz page and starts the quiz
+    window.location.href = "executeQuiz.html";   
+    }      
+    
+    </script>
+    <title>Trivia Quiz Introduction</title>
+</head>
+<body>
+    <form id = introForm>
+        <h1>Welcome to the Trivia Quiz</h1>
+        <h2>Please select the number of questions </br>you would like to have on your quiz?</h2>
+        <select id="numberQ">   <!-- drop down menu for the number of questions -->
+            <option value = 1>1</option>
+            <option value = 2>2</option>
+            <option value = 3>3</option>
+            <option value = 4>4</option>
+            <option value = 5>5</option>
+            <option value = 6>6</option>
+        </select>
+        </br></br>
+        <h2>If you want your quiz to have a time limit,</br>please enter the number of seconds below.</h2>
+        <input type="text" id="timLim">     <!-- text box for number of seconds -->
+        </br></br><h2>If you are ready to begin, click the <strong>START</strong> button below!</h2>
+        </br><input type="button" id="beginQuiz" value="START" onclick="startQuiz()">   <!-- Start! button -->
+    
+    </form>
+</body>
+</html>

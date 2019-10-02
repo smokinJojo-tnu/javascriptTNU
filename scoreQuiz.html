@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script type="text/javascript">
+
+            // Retrieve score variables from sessionStorage
+        numCorrect = window.sessionStorage.getItem("numCorrect");
+        //alert(numCorrect);
+        numWrong = window.sessionStorage.getItem("numWrong");
+        //alert(numWrong);
+
+
+    
+    
+    </script>
+
+
+    
+    <title>Trivia Quiz Score Page</title>
+</head>
+<body>
+    <h1>Congratulations! You have completed the quiz!</h1>
+    <p>You answered <script>document.write(numCorrect);</script> correctly!</p>
+    <p>You answered <script>document.write(numWrong);</script> incorrectly!</p>
+   
+
+    <p><a href="introQuiz.html">Back Home</a></p>
+</body>
+</html>
