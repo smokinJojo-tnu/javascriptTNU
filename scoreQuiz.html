@@ -8,25 +8,87 @@
     <script type="text/javascript">
 
             // Retrieve score variables from sessionStorage
-        numCorrect = window.sessionStorage.getItem("numCorrect");
+        var numCorrect = parseInt(window.sessionStorage.getItem("numCorrect"));
         //alert(numCorrect);
-        numWrong = window.sessionStorage.getItem("numWrong");
+        var numWrong = parseInt(window.sessionStorage.getItem("numWrong"));
         //alert(numWrong);
+          
+            // Add up total questions attempted and initilize totQuestions
+        var totQuestions = numCorrect + numWrong;
+        //alert("total questions = " + totQuestions);
 
+            // Calculate percent correct score and round
+        var aveScore = Math.round(((numCorrect/totQuestions) * 100));
+        //alert("aveScore = " + aveScore);
 
-    
-    
+        var runningScore = 0;
+        var prevScore = 0;
+
+        function previousStoredScore()
+        {
+            prevStrScore = window.localStorage.getItem("runScore");
+            // alert("previous string score = " + prevStrScore);
+                // parseInt to throw away previously concatenated 'x' and make value an integer
+            prevScore = parseInt(prevStrScore);
+
+            if (isNaN(prevScore))   // check for wierd values other than numbers
+            {
+                // alert("i am zeroing prevScore variable");
+                prevScore = 0;
+                window.localStorage.clear();
+            }   // End if
+            else
+            {
+            // alert("previous score = " + prevScore);
+                // Calculate running score for display to user and localStorage
+            runningScore = Math.round(((prevScore + aveScore)/2));
+            // alert("running = " + runningScore);
+            }   // End else
+        }   // End previousStoredScore() function
+
+        function displayAveAndSaveInfo()
+        {
+            if(prevScore != 0)        //Execute this statement if user has taken the quiz before on his computer
+            {       // Display any previous results 
+                //alert("im in the prevScore != 0 if");
+                document.write("<h2>Your previous average was " + prevScore + " percent !</h2>");
+                document.write("<h2>Your running score is " + runningScore + " percent !</h2>");
+                    // Concatenate to a char to make variable a string
+                var runStrScore = runningScore + "x";
+                //alert("running score string = " + runStrScore);
+                    // Store string to localStorage for next quiz
+                window.localStorage.setItem("runScore",  runStrScore);
+            }   // End if
+            else
+            {
+                    // Concatenate to a char to make variable a string
+                var aveStrScore = aveScore + "x";
+                    // Initialize localStorage value for next quiz
+                window.localStorage.setItem("runScore",  aveStrScore);
+            }   // End else
+        }   // End displayAveAndSaveInfo() function
+
     </script>
-
-
     
     <title>Trivia Quiz Score Page</title>
 </head>
+
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+
 <body>
     <h1>Congratulations! You have completed the quiz!</h1>
-    <p>You answered <script>document.write(numCorrect);</script> correctly!</p>
-    <p>You answered <script>document.write(numWrong);</script> incorrectly!</p>
-   
+    <h2>You answered <script>document.write(numCorrect);</script> questions correctly!</h2>
+    <h2>You answered <script>document.write(numWrong);</script> questions incorrectly!</h2>
+    <h2>You scored <script>document.write(aveScore);</script> percent correct!</h2>
+
+
+    <script type="text/javascript">
+
+        previousStoredScore();
+        displayAveAndSaveInfo();
+
+    </script>
+
 
     <p><a href="introQuiz.html">Back Home</a></p>
 </body>

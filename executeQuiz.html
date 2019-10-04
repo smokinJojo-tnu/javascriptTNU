@@ -4,35 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Trivia Quiz Project</title>
+    <title>Trivia Quiz Project Page</title>
 
     <script type="text/javascript">
 
-        
-
-        // function loadTimer()    // This function is called if user enters a value into the Time Limit Prompt 
-        // {
-        //     // document.write("<p id = 'countDown'></p>");
-        //     // document.getElementById("countDown").innerHTML = timer;
-        //     timer = setTimeout("alert('Times Up!!') + gradeUser() ", timeLimit);
-        // }
-
-
         function countDown(seconds,secCounter)    // Finally got this thing working with lavonda's help
-            // This function was called by the if statement in the body if a value other than 0 exists in the 
-            // timeLimit variable, in this function the timeLimit becomes secCounter.
+                // This function was called by the if statement in the body if a value other than 0 exists in the 
+                // timeLimit variable, in this function the timeLimit becomes secCounter.
         {
-        var element = document.getElementById(secCounter);
-        element.innerHTML = "Your quiz will be over in "+seconds+" seconds";
-            if(seconds < 1) 
-            {
-            clearTimeout(timer);
-            element.innerHTML = '<h2>Time is up!</h2>';
-            }
-        seconds--;
-        var timer = setTimeout('countDown(' + seconds +',"'+ secCounter + '")', 1000);
-        }
-
+            var element = document.getElementById(secCounter);
+            element.innerHTML = "Your quiz will be over in <strong>"+seconds+"</strong> seconds";
+                if(seconds < 1) 
+                {
+                clearTimeout(timer);
+                element.innerHTML = '<h2>Time is up!</h2>';
+                }
+            seconds--;
+            var timer = setTimeout('countDown(' + seconds +',"'+ secCounter + '")', 1000);
+        }   // End of countDown function
 
 
         function startQuiz()    // This function starts the quiz process
@@ -41,32 +30,32 @@
             {                                     
                 displayQuestion(q);     // call the display function and pass it 'q' pointer                    
             }
-        }
+        }   // End of startQuiz function
+
     
         function displayQuestion(i)
         {       // create the function that will display the question for each cycle of the loop
-                // alert("This is the beginning of the displayQuestion function; i is equal to " + i);
+            // alert("This is the beginning of the displayQuestion function; i is equal to " + i);
             var questionId = "question" + i;
                 // Output radio buttons with possible solutions to the screen
-                if(triviaArray[i][2] == "multiChoice")
-                {
-                    document.write("<p>" + "QUESTION # " + triviaArray[i][0] + ": "+ triviaArray[i][3] + "</p>");
-                    document.write("<input type='radio' id='" + 'a' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][4] + "'>'" + triviaArray[i][4] + "<br/>");
-                    document.write("<input type='radio' id='" + 'b' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][4] + "'>'" + triviaArray[i][5] + "<br/>");
-                    document.write("<input type='radio' id='" + 'c' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][5] + "'>'" + triviaArray[i][6] + "<br/>");
-                    document.write("<input type='radio' id='" + 'd' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][6] + "'>'" + triviaArray[i][7] + "<br/>");
-                }
+            if(triviaArray[i][2] == "multiChoice")
+            {
+                document.write("<p>" + "QUESTION # " + triviaArray[i][0] + ": "+ triviaArray[i][3] + "</p>");
+                document.write("<input type='radio' id='" + 'a' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][4] + "'>'" + triviaArray[i][4] + "<br/>");
+                document.write("<input type='radio' id='" + 'b' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][4] + "'>'" + triviaArray[i][5] + "<br/>");
+                document.write("<input type='radio' id='" + 'c' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][5] + "'>'" + triviaArray[i][6] + "<br/>");
+                document.write("<input type='radio' id='" + 'd' + triviaArray[i][0] + "' + name='" + questionId + "' value='" + triviaArray[i][6] + "'>'" + triviaArray[i][7] + "<br/>");
+            }
 
-                    // This if statement tests for fill in blank questions and outputs them appropriately with a user input box
-                if(triviaArray[i][2] == "fillInBlank")
-                {
-                    document.write("<p>" + "QUESTION # " + triviaArray[i][0] + ": "+ triviaArray[i][3] + "</p>");
-                    document.write("<input type='text' id = 'usrText" + i +"'' name = 'fibText' >");  // input box
-                    //alert("text box = " + document.getElementById('text' + i));
-                }
-
-
+                // This if statement tests for fill in blank questions and outputs them appropriately with a user input box
+            if(triviaArray[i][2] == "fillInBlank")
+            {
+                document.write("<p>" + "QUESTION # " + triviaArray[i][0] + ": "+ triviaArray[i][3] + "</p>");
+                document.write("<input type='text' id = 'usrText" + i +"'' name = 'fibText' >");  // input box
+                //alert("text box = " + document.getElementById('text' + i));
+            }
         }   // end of the displayQuestion function
+
 
         function finishQuiz()    // pass variables into sessionoStorage and move to the scoreQuiz page.
         {   
@@ -76,7 +65,8 @@
             window.sessionStorage.setItem("numWrong", numWrong);
                 // Link sends user to the finish page
             window.location.href = "scoreQuiz.html";   
-        } 
+        }   // End of finishQuiz function
+
 
         function gradeUser()    // create function that will check the users answers for multichoice questions
         {   // alert("This is the beginning of the gradeUser function");        
@@ -90,8 +80,7 @@
                 //alert("The correct answer to question " + (c + 1) + " is " + solution);   // Display the correct answer
 
                 if(triviaArray[c][2] == "multiChoice")
-                {
-                
+                {                
                 var answerOption = "a" + (c+1);     // alert("(debugger) answerOption = " + answerOption);
                 if(document.getElementById(answerOption).checked == true) { userAnswer = "a"; }
                 
@@ -115,28 +104,26 @@
                 if(triviaArray[c][2] == "fillInBlank")
                 {
                     var usrTextAnswer = document.getElementById("usrText" + c).value;
-                    //alert(usrTextAnswer);
+                        //alert(usrTextAnswer);
                         // put the answer from the array into a variable to pass to the function
                     var correctTextAns = triviaArray[c][1];
-                    //alert("the correct answer is " + correctTextAns );
+                        //alert("the correct answer is " + correctTextAns );
 
                         // Create a regular expression object that contains the string from the array
                     var correctRegExp = new RegExp(correctTextAns,"i");
-                        // If statement tests the value from the text box against the RegExp
-                        
+
+                        // If statement tests the value from the text box against the RegExp                        
                     if(usrTextAnswer.search(correctRegExp) != -1)
                     {   // execute this if a positive value is returned
-                    //alert("you got it right!");
+                        //alert("you got it right!");
                         numCorrect++;
                     }
                     else
                     {   // execute this if a -1 is returned
-                    //alert("you're wrong!");
+                        //alert("you're wrong!");
                         numWrong++;
                     }               
-                
                 }   // End of the Fill In the Blank if statement
-
             }   // End of the For loop   
 
                 // Call the finishQuiz() function to store numCorrect and numWrong variables in 
@@ -145,8 +132,8 @@
         }   // End of gradeUser() function
 
 
-                        // Create an array for multichoice questions and answers
-                        var triviaArray = new Array;      
+                // Create an array for multichoice questions and answers
+            var triviaArray = new Array;      
                 // Put a second array inside of the first array for 2 dimensional array  
             triviaArray[0] = new Array;             
             triviaArray[0][0] = "1";                // question number
@@ -220,50 +207,46 @@
 <!--///////////////////////////////////////////////////////////////////////////////////////////////////-->
 
 <body>
-    <form name="testForm" id="testForm">       
-        
+    <form name="testForm" id="testForm">        
         <script language = "javascript">
 
                 // Display H1 Title text
             document.write("<h1>Trivia Quiz</h1></br>");
 
-                // Initialize variables
+            alert("     Good Luck !!!    ");
+
+                        // Initialize variables
             var timeLimit = 0;
             var timer;
             var userNumQuestions = triviaArray.length;
             var numCorrect = 0;
             var numWrong = 0;
-
+        
+                // Get variables passed from sessionStorage and store them for use
             userNumQuestions = window.sessionStorage.getItem("numQ");
-            alert("     Good Luck !!!    ");
-
             timeLimit = window.sessionStorage.getItem("timed");
 
+            
             //alert("The length of the array is " + triviaArray.length);
 
             if(timeLimit != 0)  // This statement will execute the quiz with a timer if a value is entered at the prompt  
             {
                 timeLimit = timeLimit * 1000;   // sets the milliseconds to seconds
-                //loadTimer();
                 startQuiz();
-                document.write("<p id = 'timeDisplay'></p>");
+                document.write("<p id = 'timeDisplay'></p>");   
                 countDown((timeLimit/1000),"timeDisplay");
-
-                //document.getElementById("countDown").innerHTML = ;
             }   // end of if statement
+
             else
             {
                 //alert("the else statement started");
                 startQuiz();
             }   // end of else statement
 
-            //document.write("<button onclick = 'gradeUser()'>Check Answers</button>");      //<!--This button ends, grades and returns the score of the quiz -->
-
         </script>
-
     </form>    
 
     </br></br><button onclick = "gradeUser()">Check Answers</button>      <!-- This button ends, grades and returns the score of the quiz -->
 
-    </body>
+</body>
 </html>
