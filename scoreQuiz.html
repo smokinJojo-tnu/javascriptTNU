@@ -33,7 +33,7 @@
 
             if (isNaN(prevScore))   // check for wierd values other than numbers
             {
-                // alert("i am zeroing prevScore variable");
+                //alert("i am zeroing prevScore variable");
                 prevScore = 0;
                 window.localStorage.clear();
             }   // End if
@@ -57,14 +57,14 @@
                 var runStrScore = runningScore + "x";
                 //alert("running score string = " + runStrScore);
                     // Store string to localStorage for next quiz
-                window.localStorage.setItem("runScore",  runStrScore);
+                window.localStorage.setItem("runScore", runStrScore);
             }   // End if
             else
             {
                     // Concatenate to a char to make variable a string
                 var aveStrScore = aveScore + "x";
                     // Initialize localStorage value for next quiz
-                window.localStorage.setItem("runScore",  aveStrScore);
+                window.localStorage.setItem("runScore", aveStrScore);
             }   // End else
         }   // End displayAveAndSaveInfo() function
 
